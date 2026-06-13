@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mời Bạn Hẹn Hò ❤️</title>
+    <!-- Google Fonts: Poppins (body) & Dancing Script (display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== RESET & BASE ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce7ec 0%, #fff5f8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ==================== CONTAINER & CARD ==================== */
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(236, 101, 150, 0.15);
+            padding: 50px 35px;
+            text-align: center;
+            transition: all 0.5s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ==================== STEPPER STYLES ==================== */
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #d63384;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #d63384;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.95rem;
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        /* ==================== INPUT STYLES ==================== */
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 2px solid #f0d0d9;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        input[type="date"]:focus,
+        input[type="time"]:focus {
+            outline: none;
+            border-color: #d63384;
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(214, 51, 132, 0.1);
+        }
+
+        /* ==================== BUTTON STYLES ==================== */
+        button {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            min-height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d63384, #e85298);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(214, 51, 132, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: #f0d0d9;
+            color: #d63384;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background: #e8b9c8;
+            transform: scale(1.05);
+        }
+
+        /* ==================== SPECIAL: "NO" BUTTON (ESCAPING) ==================== */
+        .btn-no {
+            position: relative;
+            background: #f0d0d9;
+            color: #d63384;
+        }
+
+        /* ==================== FOOD GRID ==================== */
+        .food-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .food-item {
+            padding: 20px;
+            border: 3px solid #f0d0d9;
+            border-radius: 15px;
+            background: #fff9fb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .food-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.15);
+        }
+
+        .food-item.selected {
+            border-color: #d63384;
+            background: #ffe7f0;
+            color: #d63384;
+            box-shadow: 0 0 0 4px rgba(214, 51, 132, 0.2);
+        }
+
+        .food-emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .food-name {
+            font-size: 0.9rem;
+        }
+
+        /* Image responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+            max-height: 350px;
+        }
+
+        /* ==================== SUMMARY STYLES ==================== */
+        .summary {
+            background: #fff9fb;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .summary-emoji {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            min-width: 30px;
+        }
+
+        .summary-text {
+            font-weight: 500;
+        }
+
+        /* ==================== THANK YOU SCREEN ==================== */
+        .thank-you-content {
+            animation: heartbeat 0.6s ease;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .thank-you-emoji {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* ==================== UTILITY CLASSES ==================== */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-small {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        /* ==================== LOADING STATE ==================== */
+        .btn-loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+            .card {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            p {
+                font-size: 0.95rem;
+            }
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            button {
+                font-size: 0.95rem;
+                padding: 11px 24px;
+                margin: 8px;
+            }
+
+            .food-grid {
+                gap: 12px;
+            }
+
+            .food-item {
+                padding: 18px;
+            }
+
+            .food-emoji {
+                font-size: 1.8rem;
+            }
+
+            .thank-you-emoji {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html, body {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 30px 18px;
+                border-radius: 18px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 12px;
+            }
+
+            p {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+            }
+
+            label {
+                font-size: 0.85rem;
+                margin-top: 15px;
+                margin-bottom: 8px;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+                margin: 6px 4px;
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            .button-group {
+                gap: 6px;
+                margin-top: 20px;
+            }
+
+            img {
+                max-height: 280px;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin: 20px 0;
+            }
+
+            .food-item {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+
+            .food-emoji {
+                font-size: 1.8rem;
+                margin-bottom: 6px;
+            }
+
+            .food-name {
+                font-size: 0.85rem;
+            }
+
+            .summary {
+                padding: 18px;
+                margin: 20px 0;
+            }
+
+            .summary-item {
+                margin: 12px 0;
+                font-size: 0.95rem;
+            }
+
+            .summary-emoji {
+                font-size: 1.3rem;
+                margin-right: 12px;
+            }
+
+            .thank-you-emoji {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+
+            .text-small {
+                font-size: 0.8rem;
+            }
+
+            input[type="date"],
+            input[type="time"] {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <!-- ==================== STEP 1: ASK OUT ==================== -->
+            <div class="step active" data-step="1">
+                <h1>Will you go on a date with me? 🥺</h1>
+                <img src="https://media.giphy.com/media/g9GWutsL8rMzC/giphy.gif" alt="Cute emoji" style="max-width: 100%; border-radius: 15px; margin: 20px 0;">
+                <div class="button-group">
+                    <button class="btn-primary" onclick="goToStep(2)">Yes! ❤️</button>
+                    <button class="btn-no btn-secondary" id="noBtn" onmouseover="escapeNo()">No</button>
+                </div>
+            </div>
+
+            <!-- ==================== STEP 2: PICK A TIME ==================== -->
+            <div class="step hidden" data-step="2">
+                <h2>When should our adventure begin? 🌸</h2>
+                <p style="margin: 20px 0; color: #888;">Chọn ngày và giờ để chúng ta gặp nhau</p>
+                
+                <label for="dateInput">📅 Chọn Ngày</label>
+                <input type="date" id="dateInput" required>
+                
+                <label for="timeInput">🕐 Chọn Giờ</label>
+                <input type="time" id="timeInput" required>
+                
+                <div class="button-group">
+                    <button class="btn-primary" onclick="goToStep(3)">Next →</button>
+                    <button class="btn-secondary" onclick="goToStep(1)">← Quay lại</button>
+                </div>
+            </div>
+
+            <!-- ==================== STEP 3: FOOD MISSION ==================== -->
+            <div class="step hidden" data-step="3">
+                <h2>What shall we eat? 🍽️</h2>
+                <p style="margin: 20px 0; color: #888;">Chọn món ăn yêu thích của bạn</p>
+                
+                <div class="food-grid">
+                    <div class="food-item" onclick="selectFood(this, 'Jollibee')">
+                        <span class="food-emoji">🍗</span>
+                        <span class="food-name">Jollibee</span>
+                    </div>
+                    <div class="food-item" onclick="selectFood(this, 'Ramen')">
+                        <span class="food-emoji">🍜</span>
+                        <span class="food-name">Ramen</span>
+                    </div>
+                    <div class="food-item" onclick="selectFood(this, 'Hot Pot')">
+                        <span class="food-emoji">🍲</span>
+                        <span class="food-name">Hot Pot</span>
+                    </div>
+                    <div class="food-item" onclick="selectFood(this, 'BBQ')">
+                        <span class="food-emoji">🥩</span>
+                        <span class="food-name">BBQ</span>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-primary" onclick="goToStep(4)">Continue →</button>
+                    <button class="btn-secondary" onclick="goToStep(2)">← Quay lại</button>
+                </div>
+            </div>
+
+            <!-- ==================== STEP 4: CONFIRM & SEND TELEGRAM ==================== -->
+            <div class="step hidden" data-step="4">
+                <h2>OUR DATE PLAN 💕</h2>
+                <p style="margin: 20px 0; color: #888;">Xác nhận thông tin và gửi lời mời</p>
+                
+                <div class="summary">
+                    <div class="summary-item">
+                        <span class="summary-emoji">📅</span>
+                        <span class="summary-text">Ngày: <strong id="summaryDate">--</strong></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-emoji">🕐</span>
+                        <span class="summary-text">Giờ: <strong id="summaryTime">--</strong></span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-emoji">🍽️</span>
+                        <span class="summary-text">Món ăn: <strong id="summaryFood">--</strong></span>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-primary" id="sendBtn" onclick="sendToTelegram()">Confirm & Send 💌</button>
+                    <button class="btn-secondary" onclick="goToStep(3)">← Quay lại</button>
+                </div>
+            </div>
+
+            <!-- ==================== STEP 5: THANK YOU ==================== -->
+            <div class="step hidden" data-step="5">
+                <div class="thank-you-content">
+                    <div class="thank-you-emoji">💌</div>
+                    <h1>Hẹn gặp cậu nhé! 🥰</h1>
+                    <p style="margin: 30px 0; font-size: 1.1rem; color: #d63384; font-weight: 500;">
+                        Lời mời của bạn đã được gửi thành công!
+                    </p>
+                    <p style="margin: 20px 0; color: #888;">
+                        Cảm ơn bạn đã chọn để hẹn hò cùng tôi 💝<br>
+                        Tôi đã không thể chờ để gặp bạn!
+                    </p>
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="resetForm()">↻ Làm lại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ==================== TELEGRAM CONFIGURATION ==================== */
+        // 🔴 IMPORTANT: Thay YOUR_TOKEN và YOUR_CHAT_ID bằng token thực của bạn
+        // Hướng dẫn:
+        // 1. Tạo bot: Chat với @BotFather trên Telegram
+        // 2. Lấy BOT_TOKEN từ BotFather
+        // 3. Gửi tin nhắn cho bot của bạn, rồi call:
+        //    https://api.telegram.org/bot<BOT_TOKEN>/getUpdates
+        //    Tìm chat_id trong response
+        
+        const BOT_TOKEN = 'YOUR_BOT_TOKEN';        // Thay bằng token thực
+        const CHAT_ID = 'YOUR_CHAT_ID';           // Thay bằng chat ID thực
+
+        /* ==================== GLOBAL STATE ==================== */
+        let formData = {
+            date: '',
+            time: '',
+            food: ''
+        };
+
+        /* ==================== STEP NAVIGATION ==================== */
+        function goToStep(stepNumber) {
+            // Lưu dữ liệu trước khi chuyển bước
+            if (stepNumber === 2) {
+                const dateValue = document.getElementById('dateInput').value;
+                const timeValue = document.getElementById('timeInput').value;
+                
+                if (!dateValue || !timeValue) {
+                    alert('⚠️ Vui lòng chọn cả ngày và giờ!');
+                    return;
+                }
+                
+                formData.date = dateValue;
+                formData.time = timeValue;
+            }
+
+            // Ẩn tất cả các bước
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+                step.classList.add('hidden');
+            });
+
+            // Hiển thị bước được chọn
+            const targetStep = document.querySelector(`[data-step="${stepNumber}"]`);
+            targetStep.classList.add('active');
+            targetStep.classList.remove('hidden');
+
+            // Cập nhật summary khi tới step 4
+            if (stepNumber === 4) {
+                updateSummary();
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* ==================== FOOD SELECTION ==================== */
+        function selectFood(element, foodName) {
+            // Bỏ selected khỏi tất cả food-item
+            document.querySelectorAll('.food-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+
+            // Thêm selected vào item được click
+            element.classList.add('selected');
+
+            // Lưu tên món ăn
+            formData.food = foodName;
+        }
+
+        /* ==================== UPDATE SUMMARY ==================== */
+        function updateSummary() {
+            const dateObj = new Date(formData.date);
+            const formattedDate = dateObj.toLocaleDateString('vi-VN', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            document.getElementById('summaryDate').textContent = formattedDate;
+            document.getElementById('summaryTime').textContent = formData.time;
+            document.getElementById('summaryFood').textContent = formData.food || 'Chưa chọn';
+        }
+
+        /* ==================== SEND TO TELEGRAM ==================== */
+        async function sendToTelegram() {
+            const sendBtn = document.getElementById('sendBtn');
+
+            // Validate
+            if (!formData.date || !formData.time || !formData.food) {
+                alert('⚠️ Vui lòng chọn đầy đủ thông tin!');
+                return;
+            }
+
+            // Validate Telegram config
+            if (BOT_TOKEN === 'YOUR_BOT_TOKEN' || CHAT_ID === 'YOUR_CHAT_ID') {
+                alert('❌ Lỗi cấu hình:\nVui lòng thay BOT_TOKEN và CHAT_ID trong code.');
+                console.error('Telegram config not set!');
+                return;
+            }
+
+            // Hiệu ứng loading
+            sendBtn.classList.add('btn-loading');
+            sendBtn.textContent = 'Đang gửi...';
+
+            try {
+                // Chuẩn bị thông điệp
+                const dateObj = new Date(formData.date);
+                const formattedDate = dateObj.toLocaleDateString('vi-VN', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+
+                const message = `
+🎉 *LỜI MỜI HẸN HÒ* 🎉
+
+Tôi muốn mời bạn đi hẹn hò! 💕
+
+📅 *Ngày:* ${formattedDate}
+🕐 *Giờ:* ${formData.time}
+🍽️ *Thực Ăn:* ${formData.food}
+
+Hy vọng bạn sẽ nói "YES"! 🥰
+
+Lời mời được tạo bằng: https://date-invitation.app 💌
+                `.trim();
+
+                // Gửi qua Telegram API
+                const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.ok) {
+                    // ✅ Gửi thành công
+                    goToStep(5);
+                } else {
+                    // ❌ Lỗi từ API
+                    throw new Error(result.description || 'Telegram API error');
+                }
+
+            } catch (error) {
+                console.error('Telegram Send Error:', error);
+                alert(`❌ Lỗi gửi tin nhắn:\n${error.message}\n\nVui lòng kiểm tra BOT_TOKEN và CHAT_ID.`);
+                
+                sendBtn.classList.remove('btn-loading');
+                sendBtn.textContent = 'Confirm & Send 💌';
+            }
+        }
+
+        /* ==================== ESCAPE NO BUTTON ==================== */
+        function escapeNo() {
+            const noBtn = document.getElementById('noBtn');
+
+            // Random vị trí
+            const randomX = Math.random() * (window.innerWidth - 150);
+            const randomY = Math.random() * (window.innerHeight - 50);
+
+            // Đặt position fixed và thay đổi vị trí
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            // Animation bật ra
+            noBtn.style.transition = 'all 0.2s ease';
+            noBtn.style.transform = 'scale(0.95)';
+
+            setTimeout(() => {
+                noBtn.style.transform = 'scale(1)';
+            }, 50);
+        }
+
+        /* ==================== RESET FORM ==================== */
+        function resetForm() {
+            // Reset data
+            formData = {
+                date: '',
+                time: '',
+                food: ''
+            };
+
+            // Reset input
+            document.getElementById('dateInput').value = '';
+            document.getElementById('timeInput').value = '';
+            document.querySelectorAll('.food-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+
+            // Reset button state
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.classList.remove('btn-loading');
+            sendBtn.textContent = 'Confirm & Send 💌';
+
+            // Reset nút No
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'relative';
+            noBtn.style.left = 'auto';
+            noBtn.style.top = 'auto';
+
+            // Quay lại bước 1
+            goToStep(1);
+        }
+
+        /* ==================== KEYBOARD SUPPORT ==================== */
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const activeStep = document.querySelector('.step.active');
+                const nextBtn = activeStep?.querySelector('.btn-primary');
+                if (nextBtn) nextBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
