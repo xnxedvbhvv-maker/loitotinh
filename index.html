@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi lời yêu thương</title>
+    <style>
+        /* Cài đặt phông nền và căn giữa thẻ */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffe6e6; /* Màu hồng nhạt */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Thiết kế chung cho các khung thẻ */
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #ff4d4d;
+            margin-bottom: 10px;
+        }
+
+        /* --- PHẦN CSS CHO FORM ĐĂNG NHẬP --- */
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 2px solid #ffb3b3;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+        }
+
+        input[type="password"]:focus {
+            border-color: #ff4d4d;
+        }
+
+        #errorMsg {
+            color: red;
+            font-size: 14px;
+            display: none;
+            margin-bottom: 15px;
+        }
+
+        /* --- PHẦN CSS CHO THIỆP YÊU THƯƠNG --- */
+        #loveCard {
+            display: none; /* Ẩn thiệp đi lúc ban đầu */
+        }
+
+        .heart {
+            font-size: 60px;
+            color: #ff4d4d;
+            animation: heartbeat 1.5s infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            20% { transform: scale(1.2); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.2); }
+            80% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            display: none;
+            color: #555;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed #ffb3b3;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Thiết kế nút bấm chung */
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            width: 80%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KHUNG 1: FORM ĐĂNG NHẬP -->
+    <div class="card" id="loginCard">
+        <h1>Bí mật 🔒</h1>
+        <p style="color: #666; font-size: 16px;">Vui lòng nhập mật khẩu để mở khóa!</p>
+        
+        <input type="password" id="passwordInput" placeholder="Nhập mật khẩu...">
+        <p id="errorMsg">Mật khẩu sai rồi, thử lại đi nào!</p>
+        
+        <button id="loginBtn">Đăng nhập</button>
+    </div>
+
+    <!-- KHUNG 2: THIỆP YÊU THƯƠNG (Bị ẩn ban đầu) -->
+    <div class="card" id="loveCard">
+        <h1>Gửi Cậu... ❤️</h1>
+        <div class="heart">❤️</div>
+        <p style="color: #666; font-size: 16px;">Tớ có một điều muốn nói với cậu từ lâu lắm rồi...</p>
+        
+        <button id="openBtn">Mở ra xem nhé!</button>
+        
+        <!-- Thay đổi lời nhắn của bạn ở đây -->
+        <div class="message" id="secretMessage">
+            Cảm ơn cậu vì đã luôn ở bên tớ. Nụ cười của cậu là điều tuyệt vời nhất mà tớ từng thấy. Chúc cậu một ngày thật nhiều niềm vui và hạnh phúc nhé! Yêu cậu nhiều! 💕
+        </div>
+    </div>
+
+    <script>
+        // --- XỬ LÝ SỰ KIỆN ĐĂNG NHẬP ---
+        // Bạn có thể đổi mật khẩu ở dòng bên dưới (hiện tại đang là: 1234)
+        const MAT_KHAU_DUNG = "1234"; 
+
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            var nhapVao = document.getElementById('passwordInput').value;
+            var loi = document.getElementById('errorMsg');
+            
+            if (nhapVao === MAT_KHAU_DUNG) {
+                // Nếu đúng mật khẩu: Ẩn form đăng nhập, hiện thiệp yêu thương
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('loveCard').style.display = 'block';
+            } else {
+                // Nếu sai mật khẩu: Hiện thông báo lỗi
+                loi.style.display = 'block';
+            }
+        });
+
+        // Hỗ trợ ấn phím Enter để đăng nhập cho tiện
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginBtn').click();
+            }
+        });
+
+        // --- XỬ LÝ NÚT MỞ THIỆP BÊN TRONG ---
+        document.getElementById('openBtn').addEventListener('click', function() {
+            var msg = document.getElementById('secretMessage');
+            if (msg.style.display === 'none' || msg.style.display === '') {
+                msg.style.display = 'block';
+                this.textContent = 'Đóng lại';
+            } else {
+                msg.style.display = 'none';
+                this.textContent = 'Mở ra xem nhé!';
+            }
+        });
+    </script>
+
+</body>
+</html>
